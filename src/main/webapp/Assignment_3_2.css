@@ -1,0 +1,141 @@
+/*
+ Joel Atkinson, January 15,2026, CSD430 Server Side Development Assignment 3.2
+ The purpose of this assignment is to create a program that accepts different types of data with at least 5 data entry
+ points, then create a seperate JSP file to display the data that is collected
+*/
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #ffffff;
+    color: #000000;
+    line-height: 1.6;
+}
+
+
+header {
+    background-color: #c8102e;
+    color: white;
+    text-align: center;
+    padding: 35px 20px;
+}
+
+header h1 {
+    font-family: 'Italianno', cursive;
+    font-size: 4rem;
+    margin: 0;
+    font-weight: bold;
+    letter-spacing: 1px;
+    font-style: italic;
+}
+
+
+.green-line {
+    height: 5px;
+    background-color: #006400;
+    width: 100%;
+}
+
+
+main {
+    max-width: 750px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+h2 {
+    color: #000000;
+    text-align: center;
+    margin-bottom: 35px;
+    font-size: 2.2rem;
+}
+
+form {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+}
+
+label {
+    display: block;
+    margin: 20px 0 8px;
+    font-weight: bold;
+    color: #000000;
+    font-size: 1.1rem;
+}
+
+input[type="text"],
+input[type="email"],
+select,
+textarea {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #555;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: #000000;
+    background-color: #fff;
+}
+
+textarea {
+    height: 140px;
+    resize: vertical;
+}
+
+/* Star rating */
+.rating-container {
+    margin: 20px 0;
+}
+
+.star-rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+}
+
+.star-rating input {
+    display: none;
+}
+
+.star-rating label {
+    font-size: 2.8rem;
+    color: #ccc;
+    cursor: pointer;
+    margin: 0 3px;
+    transition: color 0.2s;
+}
+
+.star-rating label:before {
+    content: "★";
+}
+
+.star-rating input:checked ~ label,
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+    color: #ffcc00;
+}
+
+button {
+    background-color: #c8102e;
+    color: white;
+    padding: 14px 30px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin-top: 30px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+button:hover {
+    background-color: #006400;
+}

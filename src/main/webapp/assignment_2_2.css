@@ -1,0 +1,89 @@
+/*
+Joel Atkinson, January 14 2026, CSD430 Server Side Development Assignment 2.2
+The purpose of this assignment is to create a .jsp file program that uses HTML tags outside of Java Scriptlets that
+creates a table with data to be displayed. For my data I chose my favorite cities that I have visited around the world
+and included 9 cities with 4 data point fields per city. I also created a CSS Stylesheet to style my page. */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #eaeaea;
+    color: #000;
+    margin: 0;
+    line-height: 1.6;
+}
+
+
+.header {
+    background-color: #5b2c83;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.header h1 {
+    color: #DAA520;
+    margin-bottom: 15px;
+}
+
+.header p {
+    color: white;
+    max-width: 900px;
+    margin: 0 auto;
+    font-size: 1.1em;
+}
+
+
+.gold-divider {
+    border: none;
+    height: 4px;
+    background-color: #DAA520;
+    margin: 0;
+}
+
+
+.content {
+    background-color: white;
+    padding: 40px 20px;
+}
+
+
+h2, h3 {
+    color: #000000;
+    text-align: center;
+}
+
+
+table {
+    width: 85%;
+    margin: 30px auto;
+    border-collapse: collapse;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+
+th {
+    background-color: #5b2c83; /* Purple */
+    color: #DAA520;
+    padding: 12px 15px;
+    text-align: left;
+}
+
+
+td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #ddd;
+    color: black;
+    background-color: white;
+}
+
+
+tr:hover td {
+    background-color: #DAA520;
+    color: #5b2c83;
+}
+
+
+ul {
+    max-width: 900px;
+    margin: 30px auto;
+    font-size: 1.05em;
+}
