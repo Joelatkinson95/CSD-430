@@ -1,0 +1,215 @@
+/*  Joel Atkinson, February 7, 2026, CSD430 Server Side Development Assignment 5&6
+The purpose of this assignment is to create a database called CSD430 in SQL, then create a table (I chose U.S. states),
+and populate that table with at least 5 data fields. From there create a JavaBean to pull the data from the database
+which will be linked to the .jsp files in order to have a selection of a U.S. state and then to display the data of that
+state in a table. In addition to this, also create an index.jsp file for this course as the landing page where all of our
+assignments will be held. I went ahead and also created .css style sheets for both the index as well as the module 5/6
+.jsp files. */
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #eaeaea;
+    color: #000;
+    line-height: 1.6;
+}
+
+.page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header */
+.header {
+    background-color: #5b2c83;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.header h1 {
+    color: #DAA520;
+    margin: 0 0 12px 0;
+    font-size: 2.4em;
+}
+
+.header p {
+    color: white;
+    max-width: 900px;
+    margin: 0 auto;
+    font-size: 1.1em;
+}
+
+.gold-divider {
+    border: none;
+    height: 4px;
+    background-color: #DAA520;
+    margin: 0;
+}
+
+
+.content {
+    flex: 1 0 auto;
+    background-color: white;
+    padding: 40px 20px;
+}
+
+
+.form-card {
+    max-width: 650px;
+    margin: 0 auto;
+    padding: 24px 22px;
+    border-radius: 10px;
+    border: 2px solid #5b2c83;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+    background-color: white;
+}
+
+label {
+    font-weight: bold;
+    color: #5b2c83;
+    display: block;
+    margin-bottom: 6px;
+}
+
+select {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 2px solid #5b2c83;
+    font-size: 1em;
+    margin-bottom: 18px;
+}
+
+.button-row {
+    text-align: center;
+}
+
+button {
+    background-color: #5b2c83;
+    color: #DAA520;
+    border: none;
+    border-radius: 8px;
+    padding: 11px 24px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #DAA520;
+    color: #5b2c83;
+    box-shadow: #5b2c83 0 0 6px 2px;
+}
+
+.footer-divider {
+    border: none;
+    height: 4px;
+    background-color: #5b2c83;
+    margin: 0;
+}
+
+.footer {
+    background-color: white;
+    color: #5b2c83;
+    text-align: center;
+    padding: 16px 20px;
+    font-size: 0.95em;
+    font-weight: 600;
+    flex-shrink: 0;
+}
+
+.footer p {
+    margin: 4px 0;
+}
+
+.footer-divider {
+    border: none;
+    height: 4px;
+    background-color: #5b2c83;
+    margin: 0;
+}
+
+.assignment-footer {
+    background-color: white;
+    color: #5b2c83;
+    text-align: center;
+    padding: 16px 20px;
+    font-size: 0.95em;
+    font-weight: 600;
+    flex-shrink: 0;
+}
+
+.assignment-footer p {
+    margin: 4px 0;
+    text-align: center;
+}
+
+.state-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 16px;
+    table-layout: fixed;
+}
+
+.state-table th,
+.state-table td {
+    border: 2px solid #5b2c83;
+    padding: 10px 12px;
+    text-align: left;
+    font-size: 0.95em;
+}
+
+.state-table th {
+    background-color: #5b2c83;
+    color: #DAA520;
+    font-weight: bold;
+}
+
+.state-table td {
+    background-color: #ffffff;
+    color: #000;
+}
+
+
+.state-table td,
+.state-table th {
+    white-space: nowrap;
+}
+
+
+.form-card {
+    overflow-x: auto;
+}
+
+.link-button {
+    display: inline-block;
+    background-color: transparent;
+    color: #5b2c83;
+    text-decoration: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.link-button:hover {
+    box-shadow: #5b2c83 0 0 6px 2px;
+}
+.link-split {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 85%;
+    margin: 24px auto 0 auto;
+}
+
