@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/* Joel Atkinson, February 7, 2026, CSD430 Server Side Development Assignment 5&6
+/* Joel Atkinson, February 14, 2026  CSD430 Server Side Development Assignment 5&6 UPDATED BEAN CODE
 The purpose of this assignment is to create a database called CSD430 in SQL, then create a table (I chose U.S. states),
 and populate that table with at least 5 data fields. From there create a JavaBean to pull the data from the database
 which will be linked to the .jsp files in order to have a selection of a U.S. state and then to display the data of that
@@ -14,14 +14,12 @@ assignments will be held. I went ahead and also created .css style sheets for bo
 
 public class StatesBean {
 
-    // JDBC connection parameters
     private static final String JDBC_URL = "jdbc:mysql://localhost:3306/CSD430?useSSL=false&serverTimezone=UTC";
     private static final String JDBC_USER = "student1";
     private static final String JDBC_PASS = "pass";
     private static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
 
     static {
-        // Attempt to load the MySQL driver
         try {
             Class.forName(JDBC_DRIVER);
         } catch (ClassNotFoundException e) {
@@ -63,9 +61,10 @@ public class StatesBean {
              ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
-                int id = rs.getInt("id");
-                String name = rs.getString("state_name");
-                options.add(new StateOption(id, name));
+                options.add(new StateOption(
+                        rs.getInt("id"),
+                        rs.getString("state_name")
+                ));
             }
 
         } catch (SQLException e) {
@@ -76,26 +75,8 @@ public class StatesBean {
     }
 
 
-    public List<Integer> getAllIds() {
-        List<Integer> ids = new ArrayList<>();
-        String sql = "SELECT id FROM Joel_states_data ORDER BY id";
-
-        try (Connection conn = getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql);
-             ResultSet rs = ps.executeQuery()) {
-
-            while (rs.next()) {
-                ids.add(rs.getInt("id"));
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return ids;
-    }
-
     public StateRecord getStateById(int id) {
+
         String sql = "SELECT id, state_code, state_name, capital, region, population, year_founded " +
                 "FROM Joel_states_data WHERE id = ?";
 
@@ -103,9 +84,11 @@ public class StatesBean {
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setInt(1, id);
+
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     StateRecord s = new StateRecord();
+
                     s.id = rs.getInt("id");
                     s.stateCode = rs.getString("state_code");
                     s.stateName = rs.getString("state_name");
@@ -113,18 +96,10 @@ public class StatesBean {
                     s.region = rs.getString("region");
 
                     long popVal = rs.getLong("population");
-                    if (rs.wasNull()) {
-                        s.population = null;
-                    } else {
-                        s.population = popVal;
-                    }
+                    s.population = rs.wasNull() ? null : popVal;
 
                     int yf = rs.getInt("year_founded");
-                    if (rs.wasNull()) {
-                        s.yearFounded = null;
-                    } else {
-                        s.yearFounded = yf;
-                    }
+                    s.yearFounded = rs.wasNull() ? null : yf;
 
                     return s;
                 }
@@ -138,4 +113,80 @@ public class StatesBean {
     }
 
 
+    public List<StateRecord> getAllStates() {
+
+        List<StateRecord> states = new ArrayList<>();
+
+        String sql = "SELECT id, state_code, state_name, capital, region, population, year_founded " +
+                "FROM Joel_states_data ORDER BY state_name";
+
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+
+                StateRecord s = new StateRecord();
+
+                s.id = rs.getInt("id");
+                s.stateCode = rs.getString("state_code");
+                s.stateName = rs.getString("state_name");
+                s.capital = rs.getString("capital");
+                s.region = rs.getString("region");
+
+                long popVal = rs.getLong("population");
+                s.population = rs.wasNull() ? null : popVal;
+
+                int yf = rs.getInt("year_founded");
+                s.yearFounded = rs.wasNull() ? null : yf;
+
+                states.add(s);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return states;
+    }
+
+
+    public boolean addStateRecord(String stateName,
+                                  String stateCode,
+                                  String capital,
+                                  String region,
+                                  Long population,
+                                  Integer yearFounded) {
+
+        String sql = "INSERT INTO Joel_states_data " +
+                "(state_name, state_code, capital, region, population, year_founded) " +
+                "VALUES (?, ?, ?, ?, ?, ?)";
+
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, stateName);
+            ps.setString(2, stateCode);
+            ps.setString(3, capital);
+            ps.setString(4, region);
+
+            if (population == null) {
+                ps.setNull(5, Types.BIGINT);
+            } else {
+                ps.setLong(5, population);
+            }
+
+            if (yearFounded == null) {
+                ps.setNull(6, Types.INTEGER);
+            } else {
+                ps.setInt(6, yearFounded);
+            }
+
+            return ps.executeUpdate() == 1;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

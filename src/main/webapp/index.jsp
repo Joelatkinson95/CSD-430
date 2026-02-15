@@ -41,6 +41,18 @@ assignments will be held. I went ahead and also created .css style sheets for bo
                         </span>
                     </a>
                 </li>
+
+                <%-- Adding in link and description to my index page for Part 2 of Assignment --%>
+                <li>
+                    <a class="assignment-link" href="addState.jsp">
+                       <span class="assignment-title">
+                           Assignment Part 2 - Add State Record
+                       </span>
+                        <span class="assignment-desc">
+                            Insert New State Into Database
+                        </span>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
