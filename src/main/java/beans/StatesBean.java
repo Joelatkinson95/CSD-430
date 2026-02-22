@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/* Joel Atkinson, February 14, 2026  CSD430 Server Side Development Assignment 5&6 UPDATED BEAN CODE
+/* Joel Atkinson, February 20, 2026  CSD430 Server Side Development Assignment Part 3 UPDATED BEAN CODE
 The purpose of this assignment is to create a database called CSD430 in SQL, then create a table (I chose U.S. states),
 and populate that table with at least 5 data fields. From there create a JavaBean to pull the data from the database
 which will be linked to the .jsp files in order to have a selection of a U.S. state and then to display the data of that
@@ -181,6 +181,46 @@ public class StatesBean {
             } else {
                 ps.setInt(6, yearFounded);
             }
+
+            return ps.executeUpdate() == 1;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    //Updated portion of Java Bean for Part 3 of assignment
+    public boolean updateStateRecord(int id,
+                                     String stateName,
+                                     String stateCode,
+                                     String capital,
+                                     String region,
+                                     Long population,
+                                     Integer yearFounded) {
+
+        String sql = "UPDATE Joel_states_data " +
+                "SET state_name = ?, state_code = ?, capital = ?, region = ?, population = ?, year_founded = ? " +
+                "WHERE id = ?";
+
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, stateName);
+            ps.setString(2, stateCode);
+            ps.setString(3, capital);
+            ps.setString(4, region);
+
+            // population is NOT NULL in your table, so don't allow null
+            ps.setLong(5, (population == null ? 0 : population));
+
+            if (yearFounded == null) {
+                ps.setNull(6, Types.INTEGER);
+            } else {
+                ps.setInt(6, yearFounded);
+            }
+
+            ps.setInt(7, id);
 
             return ps.executeUpdate() == 1;
 

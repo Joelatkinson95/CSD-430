@@ -29,7 +29,6 @@ body {
     flex-direction: column;
 }
 
-/* Header */
 .header {
     background-color: #5b2c83;
     padding: 40px 20px;
@@ -211,3 +210,12 @@ button:hover {
     margin: 24px auto 0 auto;
 }
 
+input[type="text"],
+input[type="number"] {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 2px solid #5b2c83;
+    font-size: 1em;
+    margin-bottom: 18px;
+}

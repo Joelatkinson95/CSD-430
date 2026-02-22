@@ -53,6 +53,17 @@ assignments will be held. I went ahead and also created .css style sheets for bo
                         </span>
                     </a>
                 </li>
+
+                <li>
+                    <a class="assignment-link" href="updateSelect.jsp">
+                        <span class="assignment-title">
+                            Assignment Part 3 - Update State Record
+                        </span>
+                        <span class="assignment-desc">
+                            Update Existing State Record
+                        </span>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
