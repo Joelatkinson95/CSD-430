@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/* Joel Atkinson, February 20, 2026  CSD430 Server Side Development Assignment Part 3 UPDATED BEAN CODE
+/* Joel Atkinson, February 27, 2026  CSD430 Server Side Development Assignment Part 4 UPDATED BEAN CODE
 The purpose of this assignment is to create a database called CSD430 in SQL, then create a table (I chose U.S. states),
 and populate that table with at least 5 data fields. From there create a JavaBean to pull the data from the database
 which will be linked to the .jsp files in order to have a selection of a U.S. state and then to display the data of that
@@ -188,6 +188,24 @@ public class StatesBean {
             e.printStackTrace();
             return false;
         }
+    }
+
+    // Updated code for Part 4 of Project. Deletes a state record by primary key (id)
+    public boolean deleteStateById(int id) {
+        String sql = "DELETE FROM Joel_states_data WHERE id = ?";
+
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, id);
+            int rows = ps.executeUpdate();
+            return rows > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
     }
 
     //Updated portion of Java Bean for Part 3 of assignment

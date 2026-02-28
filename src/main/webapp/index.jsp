@@ -64,6 +64,17 @@ assignments will be held. I went ahead and also created .css style sheets for bo
                         </span>
                     </a>
                 </li>
+
+                <li>
+                    <a class="assignment-link" href="deleteState.jsp">
+                        <span class="assignment-title">
+                            Assignment Part 4 - Delete State Record
+                        </span>
+                        <span class="assignment-desc">
+                            Delete Existing State Record
+                        </span>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
@@ -80,3 +91,4 @@ assignments will be held. I went ahead and also created .css style sheets for bo
 
 </body>
 </html>
+
